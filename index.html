@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pablo Toledo - Senior Full Stack Developer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --crimson: #DC143C;
+            --navy: #1e3a5f;
+            --navy-light: #2a4a6b;
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray: #6c757d;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            overflow-x: hidden;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 80px;
+            right: 2rem;
+            z-index: 1001;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            background: var(--crimson);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .lang-btn.active {
+            background: var(--navy);
+        }
+
+        .lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(30, 58, 95, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--white);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--crimson);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--crimson);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.05"/><circle cx="90" cy="20" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content .highlight {
+            color: var(--crimson);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--crimson);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: #b91c3c;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(220, 20, 60, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--navy);
+        }
+
+        .hero-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, var(--crimson), #ff6b6b);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-links a:hover {
+            background: var(--crimson);
+            transform: translateY(-3px);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: var(--gray-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--crimson);
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .skill-item i {
+            font-size: 2.5rem;
+            color: var(--crimson);
+            margin-bottom: 1rem;
+        }
+
+        .skill-item h3 {
+            font-size: 1.1rem;
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--navy), var(--crimson));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .project-content p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: var(--gray-light);
+            color: var(--navy);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            color: var(--crimson);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .project-links a:hover {
+            color: var(--navy);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .contact-content {
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: var(--white);
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--crimson);
+        }
+
+        /* Language Content */
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .language-switcher {
+                top: 20px;
+                right: 1rem;
+                gap: 0.3rem;
+            }
+
+            .lang-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('en')" id="btn-en">EN</button>
+        <button class="lang-btn" onclick="switchLanguage('es')" id="btn-es">ES</button>
+    </div>
+
+    <!-- ENGLISH VERSION -->
+    <div id="content-en" class="lang-content active">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">Pablo Toledo | AI Leader</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Hi, I'm <span class="highlight">Pablo</span><br>Senior Full Stack Developer</h1>
+                    <p>AI Project Leader | Mobile & Frontend Expert | Data Science Specialist. Leading innovation with cutting-edge AI solutions and mentoring next-generation developers.</p>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i>
+                            Get In Touch
+                        </a>
+                        <a href="#projects" class="btn btn-secondary">
+                            <i class="fas fa-code"></i>
+                            View My Work
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="social-links">
+                            <a href="mailto:pablo.toledo.i@outlook.com" title="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://linkedin.com/in/pablo-toledo" title="LinkedIn" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/pablo-toledo" title="GitHub" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="tel:+56945243881" title="Phone">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title fade-in">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text fade-in">
+                        <p>I'm a Senior Full Stack Developer currently leading 2 AI projects at Grupo Defensa SPA. My expertise spans Mobile Development, Full Stack Development, Artificial Intelligence, and team leadership through mentoring.</p>
+                        
+                        <p>With extensive experience in modern frameworks like React, Angular, React Native, and Flutter, I specialize in building intelligent solutions using ASP.NET C#, Python, and cutting-edge AI technologies including web scraping and audio transcription systems.</p>
+                        
+                        <p>My recent work includes leading contract generation platforms, developing data extraction tools, and mentoring developers on client-facing portals. I've achieved rapid career progression, being promoted to Senior Full Stack Developer within just 3 months.</p>
+                        
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download CV
+                        </a>
+                    </div>
+                    <div class="skills-grid fade-in">
+                        <div class="skill-item">
+                            <i class="fas fa-robot"></i>
+                            <h3>AI Leadership</h3>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-react"></i>
+                            <h3>Full Stack</h3>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>Mobile Expert</h3>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-users"></i>
+                            <h3>Team Lead</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects">
+            <div class="container">
+                <h2 class="section-title fade-in">Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card fade-in">
+                        <div class="project-image">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>AI Innovation Projects (Current)</h3>
+                            <p>Leading 2 artificial intelligence projects at Grupo Defensa SPA, focusing on intelligent automation and machine learning solutions for enterprise applications.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Machine Learning</span>
+                                <span class="tech-tag">AI Leadership</span>
+                                <span class="tech-tag">Project Management</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-image">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Contract Generation Platform</h3>
+                            <p>Full-stack platform for automated contract generation built with React and .NET. Includes data extraction systems, audio transcription tools, and client portal integrations.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">ASP.NET</span>
+                                <span class="tech-tag">Audio Transcription</span>
+                                <span class="tech-tag">Data Extraction</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-image">
+                            <i class="fas fa-signature"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Digital Signature Portal</h3>
+                            <p>Client-facing signature portal for Grupo Defensa with advanced file management system. Led mentoring initiatives and contributed to appointment scheduling platform.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">React Native</span>
+                                <span class="tech-tag">File Management</span>
+                                <span class="tech-tag">Team Mentoring</span>
+                                <span class="tech-tag">Client Portals</span>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-content fade-in">
+                    <h2 class="section-title">Ready to Innovate Together?</h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Currently leading AI projects and looking for exciting remote opportunities. Let's discuss how I can bring AI innovation, technical leadership, and full-stack expertise to your next project.</p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>pablo.toledo.i@outlook.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+56 9 45243881</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Santiago, Chile (Remote Available)</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 3rem;">
+                        <a href="mailto:pablo.toledo.i@outlook.com" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SPANISH VERSION -->
+    <div id="content-es" class="lang-content">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">Pablo Toledo | Líder en IA</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#about">Sobre Mí</a></li>
+                    <li><a href="#projects">Proyectos</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Hola, soy <span class="highlight">Pablo</span><br>Desarrollador Full Stack Senior</h1>
+                    <p>Líder de Proyectos IA | Experto Mobile & Frontend | Especialista en Ciencia de Datos. Liderando innovación con soluciones de IA de vanguardia y mentorando la próxima generación de desarrolladores.</p>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-envelope"></i>
+                            Conversemos
+                        </a>
+                        <a href="#projects" class="btn btn-secondary">
+                            <i class="fas fa-code"></i>
+                            Ver Proyectos
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="social-links">
+                            <a href="mailto:pablo.toledo.i@outlook.com" title="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://linkedin.com/in/pablo-toledo" title="LinkedIn" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://github.com/pablo-toledo" title="GitHub" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="tel:+56945243881" title="Teléfono">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title fade-in">Sobre Mí</h2>
+                <div class="about-content">
+                    <div class="about-text fade-in">
+                        <p>Soy un Desarrollador Full Stack Senior actualmente liderando 2 proyectos de IA en Grupo Defensa SPA. Mi experiencia abarca Desarrollo Móvil, Desarrollo Full Stack, Inteligencia Artificial, y liderazgo de equipos a través de mentoría.</p>
+                        
+                        <p>Con amplia experiencia en frameworks modernos como React, Angular, React Native y Flutter, me especializo en crear soluciones inteligentes usando ASP.NET C#, Python, y tecnologías de IA de vanguardia incluyendo web scraping y sistemas de transcripción de audio.</p>
+                        
+                        <p>Mi trabajo reciente incluye liderar plataformas de generación de contratos, desarrollar herramientas de extracción de datos, y mentorear desarrolladores en portales para clientes. He logrado una progresión profesional rápida, siendo promovido a Desarrollador Full Stack Senior en solo 3 meses.</p>
+                        
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Descargar CV
+                        </a>
+                    </div>
+                    <div class="skills-grid fade-in">
+                        <div class="skill-item">
+                            <i class="fas fa-robot"></i>
+                            <h3>Liderazgo IA</h3>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-react"></i>
+                            <h3>Full Stack</h3>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>Experto Mobile</h3>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-users"></i>
+                            <h3>Líder de Equipo</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects">
+            <div class="container">
+                <h2 class="section-title fade-in">Proyectos Destacados</h2>
+                <div class="projects-grid">
+                    <div class="project-card fade-in">
+                        <div class="project-image">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Proyectos de Innovación IA (Actual)</h3>
+                            <p>Liderando 2 proyectos de inteligencia artificial en Grupo Defensa SPA, enfocados en automatización inteligente y soluciones de machine learning para aplicaciones empresariales.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Machine Learning</span>
+                                <span class="tech-tag">Liderazgo IA</span>
+                                <span class="tech-tag">Gestión de Proyectos</span>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-image">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Plataforma de Generación de Contratos</h3>
+                            <p>Plataforma full-stack para generación automatizada de contratos desarrollada con React y .NET. Incluye sistemas de extracción de datos, herramientas de transcripción de audio, e integraciones de portales para clientes.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">ASP.NET</span>
+                                <span class="tech-tag">Transcripción Audio</span>
+                                <span class="tech-tag">Extracción Datos</span>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-image">
+                            <i class="fas fa-signature"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Portal de Firmas Digitales</h3>
+                            <p>Portal de firmas para clientes de Grupo Defensa con sistema avanzado de gestión de archivos. Lideré iniciativas de mentoría y contribuí a la plataforma de agenda de citas.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">React Native</span>
+                                <span class="tech-tag">Gestión Archivos</span>
+                                <span class="tech-tag">Mentoría Equipo</span>
+                                <span class="tech-tag">Portales Cliente</span>
+                            </div>
+                          
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-image">
+                            <i class="fas fa-gas-pump"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Plataforma Muevo Empresas</h3>
+                            <p>Plataforma empresarial para Copec SA con migración a arquitectura limpia, integración de autoservicio para gasolineras, y desarrollo de app móvil usando Flutter.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Angular</span>
+                                <span class="tech-tag">Flutter</span>
+                                <span class="tech-tag">Firebase</span>
+                                <span class="tech-tag">Arquitectura Limpia</span>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-image">
+                            <i class="fas fa-spider"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Herramientas de Extracción de Datos</h3>
+                            <p>Sistemas avanzados de extracción de datos y soluciones de web scraping usando Python. Implementados para proyectos de innovación con integración de machine learning.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Web Scraping</span>
+                                <span class="tech-tag">Procesamiento Datos</span>
+                                <span class="tech-tag">Automatización</span>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <div class="project-image">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3>Plataforma ML para Salud</h3>
+                            <p>Plataforma web para el sector salud usando tecnologías OCR y Machine Learning, logrando 90% de precisión en procesamiento automatizado de documentos.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Machine Learning</span>
+                                <span class="tech-tag">OCR</span>
+                                <span class="tech-tag">Ciencia de Datos</span>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-content fade-in">
+                    <h2 class="section-title">¿Listos para Innovar Juntos?</h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 2rem;">Actualmente liderando proyectos de IA y buscando oportunidades remotas emocionantes. Conversemos sobre cómo puedo aportar innovación en IA, liderazgo técnico, y experiencia full-stack a tu próximo proyecto.</p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>pablo.toledo.i@outlook.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+56 9 45243881</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Santiago, Chile (Remoto Disponible)</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 3rem;">
+                        <a href="mailto:pablo.toledo.i@outlook.com" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Enviar Mensaje
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let currentLanguage = 'en';
+
+        function switchLanguage(lang) {
+            // Hide all language content
+            document.querySelectorAll('.lang-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected language content
+            document.getElementById(`content-${lang}`).classList.add('active');
+            
+            // Update button states
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`btn-${lang}`).classList.add('active');
+            
+            // Update page language attribute
+            document.documentElement.lang = lang;
+            
+            // Update page title based on language
+            const titles = {
+                'en': 'Pablo Toledo - Senior Full Stack Developer',
+                'es': 'Pablo Toledo - Desarrollador Full Stack Senior'
+            };
+            document.title = titles[lang];
+            
+            currentLanguage = lang;
+        }
+
+        // Smooth scrolling for navigation links
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('a[href^="#"]')) {
+                e.preventDefault();
+                const targetId = e.target.getAttribute('href');
+                const targetElement = document.querySelector(`#content-${currentLanguage} ${targetId}`);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbars = document.querySelectorAll('.navbar');
+            navbars.forEach(navbar => {
+                if (window.scrollY > 100) {
+                    navbar.style.background = 'rgba(30, 58, 95, 0.98)';
+                } else {
+                    navbar.style.background = 'rgba(30, 58, 95, 0.95)';
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user prefers Spanish based on browser language
+            const userLang = navigator.language || navigator.userLanguage;
+            if (userLang.startsWith('es')) {
+                switchLanguage('es');
+            }
+        });
+    </script>
+</body>
+</html>
